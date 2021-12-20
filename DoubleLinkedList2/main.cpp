@@ -46,7 +46,7 @@ void tambahDepan(int data){
 }
 
 void tambahBelakang(int data){
-       Node *nodeBaru;
+    Node *nodeBaru;
     nodeBaru = new Node;
 
     nodeBaru->data = data;
@@ -77,8 +77,17 @@ void hapusDepan(){
 
 
 void hapusBelakang(){
-
     if(!isEmpty()){
+        if(head->next == NULL){
+            head = NULL;
+        }else{
+            Node *temp = head;
+            while(temp->next->next != NULL){
+                temp = temp->next;
+            }
+            Node *last = temp->next;
+            temp->next = NULL;
+        }
         tail = tail->prev;
         cout<<" Berhasil menghapus belakang"<<endl; 
     }else{
@@ -103,20 +112,55 @@ void tampil(){
 }
 
 int main(){
+    awal();
+    int i,input;
+    while(i != 6){
+        cout<<"================="<<endl;
+        cout<<"Double Linked List"<<endl;
+        cout<<"================="<<endl;
+        cout<<"1. Lihat Data"<<endl;
+        cout<<"2. Tambah Depan"<<endl;
+        cout<<"3. Tambah Belakang"<<endl;
+        cout<<"4. Hapus Depan"<<endl;
+        cout<<"5. Hapus Belakang"<<endl;
+        cout<<"6. Keluar"<<endl;
+        cout<<"Pilih Angka : ";
+        cin>>i;
 
-    tambahDepan(10);
-    tampil();
-    tambahDepan(2);
-    tampil();
-    tambahDepan(7);
-    tampil();
-    hapusDepan();
-    tampil();
-      tambahBelakang(55);
-    tampil();
-      tambahBelakang(21);
-    tampil();
-      hapusBelakang();
-    tampil();
+        switch(i){
+            case 1:
+                system("cls");
+                tampil();
+                break;
+            case 2:
+                cout<<"Masukkan angka : ";
+                cin>>input;
+                tambahDepan(input);
+                tampil();
+                break;
+            case 3:
+                cout<<"Masukkan angka : ";
+                cin>>input;
+                tambahBelakang(input);
+                tampil();
+                break;
+            case 4:
+                system("cls");
+                hapusDepan();
+                break;
+            case 5:
+                system("cls");
+                hapusBelakang();
+                break;
+            case 6:
+                return 0;
+                break;
+            default:
+                cout<<"Tidak ditemukan!";
+                system("cls");
+                break;
+        }
+    }
+
     return 0;
 }
